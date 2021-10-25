@@ -85,9 +85,9 @@ read randomIrrelevant
 echo "Starting eclipsa"
 
 cd files
-    echo "Device has a samsung chip, using eclipsa8000"
-    ./eclipsa8000
-    sleep 1
+echo "Device has a samsung chip, using eclipsa8000"
+./eclipsa8000
+sleep 1
 echo "Device is now in pwned DFU mode with signature checks removed (Thanks to 0x7ff)"
 
 sleep 2
