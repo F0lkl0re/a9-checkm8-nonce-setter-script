@@ -84,9 +84,8 @@ read randomIrrelevant
 
 echo "Starting eclipsa"
 
-cd files
 echo "Device has a samsung chip, using eclipsa8000"
-./eclipsa8000
+./files/eclipsa8000
 sleep 1
 echo "Device is now in pwned DFU mode with signature checks removed (Thanks to 0x7ff)"
 
@@ -97,33 +96,32 @@ echo "Uploading bootchain"
 iBSS="iBSS.$device.img4"
 iBEC="iBEC.$device.img4"
 echo "Uploading $iBSS"
-./irecovery -f $iBSS
+./files/irecovery -f $iBSS
 sleep 2
 echo "Uploading $iBEC"
-./irecovery -f $iBEC
+./files/irecovery -f $iBEC
 sleep 2
 
 echo "We should be in pwned recovery mode now"
 
-
 echo "Current nonce"
-./irecovery -q | grep NONC
+./files/irecovery -q | grep NONC
 echo "Setting nonce to $generator"
-./irecovery -c "bgcolor 255 0 0"
+./files/irecovery -c "bgcolor 255 0 0"
 sleep 1
-./irecovery -c "setenv com.apple.System.boot-nonce $generator"
+./files/irecovery -c "setenv com.apple.System.boot-nonce $generator"
 sleep 1
-./irecovery -c "saveenv"
+./files/irecovery -c "saveenv"
 sleep 1
-./irecovery -c "setenv auto-boot false"
+./files/irecovery -c "setenv auto-boot false"
 sleep 1
-./irecovery -c "saveenv"
+./files/irecovery -c "saveenv"
 sleep 1
-./irecovery -c "reset"
+./files/irecovery -c "reset"
 echo "Waiting for device to restart into recovery mode"
 sleep 7
 echo "New nonce"
-./irecovery -q | grep NONC
+./files/irecovery -q | grep NONC
 
 echo "We are done!"
 echo ""
