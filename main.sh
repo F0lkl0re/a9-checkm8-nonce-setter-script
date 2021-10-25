@@ -76,56 +76,7 @@ fi
 
 echo "$generator"
 echo "getting device model"
-
-files/igetnonce | grep 'n69ap' &> /dev/null
-if [ $? == 0 ]; then
-   echo "Supported Device"
-   device="n69ap"
-   echo $device
-fi
-
-files/igetnonce | grep 'n69uap' &> /dev/null
-if [ $? == 0 ]; then
-   echo "Supported Device"
-   device="n69uap"
-   echo $device
-fi
-
-files/igetnonce | grep 'n71ap' &> /dev/null
-if [ $? == 0 ]; then
-   echo "Supported Device"
-   device="n71ap"
-   echo $device
-fi
-
-files/igetnonce | grep 'n71map' &> /dev/null
-if [ $? == 0 ]; then
-   echo "Supported Device"
-   device="n71map"
-   echo $device
-fi
-files/igetnonce | grep 'n66ap' &> /dev/null
-if [ $? == 0 ]; then
-   echo "Supported Device"
-   device="n71map"
-   echo $device
-fi
-files/igetnonce | grep 'n66map' &> /dev/null
-if [ $? == 0 ]; then
-   echo "Supported Device"
-   device="n71map"
-   echo $device
-fi
-
-
-if [ -z "$device" ]
-then
-    echo "Either unsupported device or no device found."
-    echo "Exiting.."
-    exit
-else
-    echo "Supported device found."
-fi
+echo "SE found"
 
 echo "Please connect device in DFU mode. Press enter when ready to continue"
 
@@ -134,16 +85,9 @@ read randomIrrelevant
 echo "Starting eclipsa"
 
 cd files
-
-if [ $device == n69ap ] || [ $device == n71map ] || [ $device == n66map ]; then
-    echo "Device has a tsmc chip, using eclipsa8003"
-    ./eclipsa8003
-    sleep 1
-else
     echo "Device has a samsung chip, using eclipsa8000"
     ./eclipsa8000
     sleep 1
-fi
 echo "Device is now in pwned DFU mode with signature checks removed (Thanks to 0x7ff)"
 
 sleep 2
